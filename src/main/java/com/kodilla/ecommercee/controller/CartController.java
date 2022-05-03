@@ -11,9 +11,9 @@ import java.util.List;
 @RequestMapping("v1/carts")
 public class CartController {
 
-    @PostMapping
-    public CartDto createEmptyCart() {
-        return new CartDto(1L, 1L, new ArrayList<>(), new BigDecimal(0.00));
+    @PostMapping(value = "{userId}")
+    public CartDto createEmptyCart(@PathVariable Long userId) {
+        return new CartDto(1L, userId, new ArrayList<>(), new BigDecimal(0.00));
     }
 
     @GetMapping(value = "{cartId}")
@@ -21,18 +21,18 @@ public class CartController {
         return new ArrayList<>();
     }
 
-    @PutMapping(value = "{productID}")
-    public boolean addProductToCart(@PathVariable Long productId) {
+    @PutMapping(value = "{cartId}/{productId}")
+    public boolean addProductToCart(@PathVariable Long cartId, @PathVariable Long productId) {
         return true;
     }
 
-    @DeleteMapping(value = "{productId}")
-    public boolean deleteProductFromCart(Long productId) {
+    @DeleteMapping(value = "{cartId}/{productId}")
+    public boolean deleteProductFromCart(@PathVariable Long cartId, @PathVariable Long productId) {
         return true;
     }
 
     @PostMapping(value = "{cartId}")
-    public String createOrder(Long cartId) {
+    public String createOrder(@PathVariable Long cartId) {
         return "Order has been created";
     }
 }
