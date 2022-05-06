@@ -15,9 +15,12 @@ public class ProductGroupController {
         return new ArrayList<>();
     }
 
-    @PostMapping(value = "{groupName}")
-    public ProductGroupDto addGroup(@PathVariable String groupName) {
-        return new ProductGroupDto(1L, groupName, new ArrayList<>());
+    @PostMapping()
+    public ProductGroupDto addGroup(@RequestBody ProductGroupDto productGroupDto) {
+        return new ProductGroupDto(
+                productGroupDto.getProductGroupId(),
+                productGroupDto.getName(),
+                productGroupDto.getProductList());
     }
 
     @GetMapping(value = "{groupId}")
