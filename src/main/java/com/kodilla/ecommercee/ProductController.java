@@ -1,5 +1,6 @@
 package com.kodilla.ecommercee;
 
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -18,16 +19,16 @@ public class ProductController {
     public ProductDto getProduct(@PathVariable long productId) {
         return new ProductDto(1,"Produkt1",12,4);
     }
-    @DeleteMapping
-    public void deleteProduct(Long productId) {
+    @DeleteMapping(value = {"productId"})
+    public void deleteProduct(@PathVariable Long productId) {
     }
 
     @PutMapping
-    public ProductDto updateProduct(ProductDto productDto){
+    public ProductDto updateProduct(@RequestBody ProductDto productDto){
         return new ProductDto(1,"Produkt1.1",14,2);
     }
 
-    @PostMapping
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public void createProduct(ProductDto productDto){
 
     }
