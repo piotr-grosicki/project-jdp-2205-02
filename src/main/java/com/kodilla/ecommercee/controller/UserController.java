@@ -9,10 +9,11 @@ import java.time.LocalDateTime;
 @RequestMapping(value = "v1/users")
 public class UserController {
 
-    @PostMapping
-    public UserDto createUser() {
+    @PostMapping(value = "/create")
+    public UserDto createUser(@RequestBody UserDto userDto) {
         return new UserDto(1L, "JohnSmith", "123456", "smith@domain.com",
-                "Street 1", true, "123456", LocalDateTime.now(), 1L);
+                "Street 1", true, "123456",
+                LocalDateTime.of(2022, 5, 5, 10, 00, 00), 1L);
     }
 
     @PutMapping(value = "{userId}/block")
