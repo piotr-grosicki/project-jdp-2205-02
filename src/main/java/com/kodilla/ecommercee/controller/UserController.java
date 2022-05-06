@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @RequestMapping(value = "v1/users")
 public class UserController {
 
-    @PostMapping(value = "/create")
+    @PostMapping
     public UserDto createUser(@RequestBody UserDto userDto) {
         return new UserDto(1L, "JohnSmith", "123456", "smith@domain.com",
                 "Street 1", true, "123456",
