@@ -12,4 +12,3 @@ public class ProductDto {
     private double price;
     private int stock;
 }
-gid
