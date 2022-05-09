@@ -13,7 +13,7 @@ import java.util.List;
 @Getter
 @AllArgsConstructor
 @RestController
-@RequestMapping("/v1/order")
+@RequestMapping("/v1/orders")
 public class OrderController {
 
     @GetMapping
@@ -21,22 +21,24 @@ public class OrderController {
         return new ArrayList<>();
     }
 
-    @GetMapping(value = {"orderId"})
+    @GetMapping(value = "{orderId}")
     public OrderDto getOrder(@PathVariable long orderId) {
         return new OrderDto(1,1,"order status",new Date(2000,11, 11));
     }
-    @DeleteMapping
-    public void deleteOrder(Long productId) {
+    @DeleteMapping(value = "{orderId}")
+    public String deleteOrder(@PathVariable long orderId) {
+        return "order xyz was deleted";
     }
 
-    @PutMapping
+    @PutMapping(value = "{orderId}")
     public OrderDto updateOrder(OrderDto orderDto){
-        return new OrderDto(1,1,"order status",new Date(2000,11, 11));
+        return new OrderDto(1,1,"order status ",new Date(2000,11, 13));
     }
 
     @PostMapping
-    public void createOrder(OrderDto orderDto){
+    public OrderDto createOrder(@RequestBody OrderDto orderDto){
 
+        return new OrderDto(2, 2,"create order" , new Date( 2111,11,10));
     }
 
 

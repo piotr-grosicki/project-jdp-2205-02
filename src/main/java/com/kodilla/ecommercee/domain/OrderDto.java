@@ -8,9 +8,10 @@ import java.util.Date;
 @Getter
 @AllArgsConstructor
 public class OrderDto {
-    private int order_id;
-    private int cart_id;
+    private long order_id;
+    private long cart_id;
     private String status;
     private Date order_date;
+
 
 }
