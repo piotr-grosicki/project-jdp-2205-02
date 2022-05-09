@@ -30,8 +30,8 @@ public class OrderController {
         return "order xyz was deleted";
     }
 
-    @PutMapping(value = "{orderId}")
-    public OrderDto updateOrder(OrderDto orderDto){
+    @PutMapping
+    public OrderDto updateOrder(@RequestBody OrderDto orderDto){
         return new OrderDto(1,1,"order status ",new Date(2000,11, 13));
     }
 
