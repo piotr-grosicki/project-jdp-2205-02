@@ -4,7 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-    @NoArgsConstructor
+import java.math.BigDecimal;
+
+@NoArgsConstructor
     @AllArgsConstructor
     @Getter
 
@@ -17,7 +19,7 @@ import lombok.NoArgsConstructor;
         private String name;
 
 
-        private double price;
+        private BigDecimal price;
 
 
         private int stock;

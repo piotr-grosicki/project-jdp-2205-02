@@ -17,7 +17,7 @@ public class ProductController {
     }
 
     @GetMapping(value = "{productId}")
-    public ProductDto getProduct(@PathVariable long productId) {
+    public ProductDto getProduct(@PathVariable Long productId) {
         return new ProductDto(1L,"Produkt1",new BigDecimal(12),4);
     }
 
