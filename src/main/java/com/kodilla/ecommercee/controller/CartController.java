@@ -11,7 +11,7 @@ import java.util.List;
 @RequestMapping("v1/carts")
 public class CartController {
 
-    @PostMapping(value = "{userId}")
+    @PostMapping(value = "/userId/{userId}")
     public CartDto createEmptyCart(@PathVariable Long userId) {
         return new CartDto(1L, userId, new ArrayList<>(), new BigDecimal(0.00));
     }
@@ -31,7 +31,7 @@ public class CartController {
         return true;
     }
 
-    @PostMapping(value = "{cartId}")
+    @PostMapping(value = "/cartId/{cartId}")
     public String createOrder(@PathVariable Long cartId) {
         return "Order has been created";
     }
