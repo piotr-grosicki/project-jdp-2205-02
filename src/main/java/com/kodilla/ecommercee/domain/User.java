@@ -47,6 +47,8 @@ public class User {
     @Column(name = "Session_Started")
     private LocalDateTime sessionStartTime;
 
+//usunąć zakomentowanie linijek po utworzeniu korespondującej encji Cart
+
 //    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 //    @Column(name = "ID_Cart")
 //    private Cart activeCart;
@@ -71,11 +73,4 @@ public class User {
 //        this.activeCart = activeCart;
 //        this.carts = carts;
 //    }
-
-    public User(String userName, String phoneNumber, String email, String shippingAddress) {
-        this.userName = userName;
-        this.phoneNumber = phoneNumber;
-        this.email = email;
-        this.shippingAddress = shippingAddress;
-    }
 }
