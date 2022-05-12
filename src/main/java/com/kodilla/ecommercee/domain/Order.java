@@ -23,7 +23,7 @@ public class Order {
     private int OrderId;
 
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToOne
     @JoinColumn(name = "Cart_ID")
     @NotNull
     @Column(name = "Cart_ID")
