@@ -31,13 +31,13 @@ public class Cart {
     private User user;
 
     /*
-    @OneToMany(
-            targetEntity = CartPosition.class,
-            mappedBy = "cart",
-            cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "Cart_Position",
+            joinColumns = {@JoinColumn(name = "Cart_ID", referencedColumnName = "Cart_ID")},
+            inverseJoinColumns = {@JoinColumn(name = "Product_ID", referencedColumnName = "Product_ID")}
     )
-    private ArrayList<CartPosition> items;
+    private ArrayList<Product> items;
      */
 
     @OneToOne
