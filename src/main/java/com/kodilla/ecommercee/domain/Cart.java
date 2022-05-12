@@ -40,7 +40,7 @@ public class Cart {
     private ArrayList<Product> items;
      */
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "Order_ID")
     private Order order;
 
