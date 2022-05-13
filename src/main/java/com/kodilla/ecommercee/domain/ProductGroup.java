@@ -17,6 +17,8 @@ import java.util.List;
 public class ProductGroup {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @NotNull
     @Column(name = "Product_Group_Id")
     private Long id;
 
