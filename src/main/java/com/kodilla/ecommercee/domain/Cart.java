@@ -19,11 +19,11 @@ public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "Cart_ID", unique = true)
-    private int cartId;
+    private long cartId;
 
     @Column(name = "Total_Value")
     @NotNull
-    private int totalValue;
+    private long totalValue;
 
     /*
     @ManyToOne
