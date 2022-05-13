@@ -20,7 +20,7 @@ public class Order {
     @NotNull
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "Order_ID")
-    private int OrderId;
+    private long OrderId;
 
     /*
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
