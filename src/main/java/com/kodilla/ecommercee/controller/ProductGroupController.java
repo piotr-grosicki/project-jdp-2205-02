@@ -25,7 +25,7 @@ public class ProductGroupController {
 
     @GetMapping(value = "{groupId}")
     public ProductGroupDto getGroup(@PathVariable Long groupId) {
-        return new ProductGroupDto(1L, "test group",new ArrayList<>());
+        return new ProductGroupDto(1L, "test group", new ArrayList<>());
     }
 
     @PutMapping
