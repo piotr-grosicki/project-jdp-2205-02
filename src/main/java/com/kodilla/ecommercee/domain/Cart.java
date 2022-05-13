@@ -18,19 +18,19 @@ public class Cart {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "Cart_ID")
+    @Column(name = "Cart_ID", unique = true)
     private int cartId;
 
     @Column(name = "Total_Value")
     @NotNull
     private int totalValue;
 
+    /*
     @ManyToOne
     @JoinColumn(name = "ID_User")
     @NotNull
     private User user;
 
-    /*
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "Cart_Position",
@@ -40,8 +40,7 @@ public class Cart {
     private ArrayList<Product> items;
      */
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "Order_ID")
+    @OneToOne(mappedBy = "cart", cascade = CascadeType.ALL)
     private Order order;
 
 }

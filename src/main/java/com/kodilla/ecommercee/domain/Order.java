@@ -13,7 +13,8 @@ import java.time.LocalDate;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "ORDER")
+@Entity
+@Table(name = "ORDER")
 public class Order {
 
     @Id
@@ -26,7 +27,6 @@ public class Order {
     @OneToOne
     @JoinColumn(name = "Cart_ID")
     @NotNull
-    @Column(name = "Cart_ID")
     private Cart cart;
 
     /*
