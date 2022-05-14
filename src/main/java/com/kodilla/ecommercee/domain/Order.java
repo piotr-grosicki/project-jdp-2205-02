@@ -29,11 +29,11 @@ public class Order {
     @NotNull
     private Cart cart;
 
-    /*
+
     @NotNull
     @Column(name = "Status")
-    private Status status;
-    */
+    private OrderStatus orderStatus;
+
 
     @NotNull
     @Column(name = "Date")
