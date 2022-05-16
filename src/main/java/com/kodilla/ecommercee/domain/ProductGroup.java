@@ -19,18 +19,19 @@ public class ProductGroup {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @NotNull
-    @Column(name = "Product_Group_Id")
+    @Column(name = "Product_Group_ID")
     private Long id;
 
     @Column(name = "Name")
     private String name;
 
-    // delete this comment after Product class implementation
-    /*@OneToMany(
+
+    @OneToMany(
             targetEntity = Product.class,
-            mappedBy = "group",
+            mappedBy = "productGroup",
             cascade = {CascadeType.ALL},
             fetch = FetchType.LAZY
     )
-    private List<Product> products = new ArrayList<>();*/
+    private List<Product> products;
+    
 }

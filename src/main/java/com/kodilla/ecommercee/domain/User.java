@@ -47,30 +47,28 @@ public class User {
     @Column(name = "Session_Started")
     private LocalDateTime sessionStartTime;
 
-//usunąć zakomentowanie linijek po utworzeniu korespondującej encji Cart
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Cart activeCart;
 
-//    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-//    @Column(name = "ID_Cart")
-//    private Cart activeCart;
-//
-//    @OneToMany(
-//            targetEntity = Cart.class,
-//            mappedBy = "user",
-//            cascade = CascadeType.ALL,
-//            fetch = FetchType.LAZY
-//    )
-//    private List<Cart> carts;
-//
-//    public User(String userName, String phoneNumber, String email, String shippingAddress, boolean isActive,
-//                String sessionToken, LocalDateTime sessionStartTime, Cart activeCart, List<Cart> carts) {
-//        this.userName = userName;
-//        this.phoneNumber = phoneNumber;
-//        this.email = email;
-//        this.shippingAddress = shippingAddress;
-//        this.isActive = isActive;
-//        this.sessionToken = sessionToken;
-//        this.sessionStartTime = sessionStartTime;
-//        this.activeCart = activeCart;
-//        this.carts = carts;
-//    }
+    @OneToMany(
+            targetEntity = Cart.class,
+            mappedBy = "user",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
+    private List<Cart> carts;
+
+    public User(String userName, String phoneNumber, String email, String shippingAddress, boolean isActive,
+                String sessionToken, LocalDateTime sessionStartTime, Cart activeCart, List<Cart> carts) {
+        this.userName = userName;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.shippingAddress = shippingAddress;
+        this.isActive = isActive;
+        this.sessionToken = sessionToken;
+        this.sessionStartTime = sessionStartTime;
+        this.activeCart = activeCart;
+        this.carts = carts;
+    }
+
 }

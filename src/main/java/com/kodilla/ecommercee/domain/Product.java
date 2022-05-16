@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -19,7 +20,7 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "id", unique = true)
+    @Column(name = "Product_ID", unique = true)
     private Long productId;
 
     @Column(name = "name")
@@ -31,13 +32,11 @@ public class Product {
     @Column(name = "stock")
     private int stock;
 
-
-/*
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "items")
     private List<Cart> carts;
 
     @ManyToOne
-    @JoinColumn(name = "Product_Group_Id")
+    @JoinColumn(name = "Product_Group_ID")
     private ProductGroup productGroup;
-    */
+
 }

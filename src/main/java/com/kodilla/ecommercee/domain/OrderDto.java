@@ -8,10 +8,10 @@ import java.time.LocalDate;
 @Getter
 @AllArgsConstructor
 public class OrderDto {
+
     private long order_id;
     private long cart_id;
     private String status;
     private LocalDate order_date;
-
 
 }

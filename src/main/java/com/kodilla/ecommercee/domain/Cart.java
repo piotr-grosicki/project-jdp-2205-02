@@ -7,7 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -25,7 +25,6 @@ public class Cart {
     @NotNull
     private long totalValue;
 
-    /*
     @ManyToOne
     @JoinColumn(name = "ID_User")
     @NotNull
@@ -37,8 +36,7 @@ public class Cart {
             joinColumns = {@JoinColumn(name = "Cart_ID", referencedColumnName = "Cart_ID")},
             inverseJoinColumns = {@JoinColumn(name = "Product_ID", referencedColumnName = "Product_ID")}
     )
-    private ArrayList<Product> items;
-     */
+    private List<Product> items;
 
     @OneToOne(mappedBy = "cart", cascade = CascadeType.ALL)
     private Order order;
