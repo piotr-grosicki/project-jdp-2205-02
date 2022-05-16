@@ -25,7 +25,6 @@ public class Cart {
     @NotNull
     private long totalValue;
 
-    /*
     @ManyToOne
     @JoinColumn(name = "ID_User")
     @NotNull
@@ -38,7 +37,6 @@ public class Cart {
             inverseJoinColumns = {@JoinColumn(name = "Product_ID", referencedColumnName = "Product_ID")}
     )
     private ArrayList<Product> items;
-     */
 
     @OneToOne(mappedBy = "cart", cascade = CascadeType.ALL)
     private Order order;

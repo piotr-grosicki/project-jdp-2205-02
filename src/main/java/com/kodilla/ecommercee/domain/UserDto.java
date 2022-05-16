@@ -18,4 +18,5 @@ public class UserDto {
     private String sessionToken;
     private LocalDateTime sessionStartTime;
     private Long activeCart;
+
 }
