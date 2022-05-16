@@ -12,6 +12,6 @@ public class CartDto {
 
     private Long cartId;
     private Long userId;
-    private List<String> products; //change String to ProductsDto after implementation ProductsDto
+    private List<ProductDto> products;
     private BigDecimal totalValue;
 }
