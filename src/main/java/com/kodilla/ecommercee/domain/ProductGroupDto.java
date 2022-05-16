@@ -11,6 +11,5 @@ public class ProductGroupDto {
 
     private Long productGroupId;
     private String name;
-    private List<String> productList; //change String to ProductsDto after implementation ProductsDto
-
+    private List<ProductDto> productList;
 }
