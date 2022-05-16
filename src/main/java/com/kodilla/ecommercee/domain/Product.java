@@ -33,7 +33,7 @@ public class Product {
 
 
 /*
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "items")
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "group")
     private List<Cart> carts;
 
     @ManyToOne
