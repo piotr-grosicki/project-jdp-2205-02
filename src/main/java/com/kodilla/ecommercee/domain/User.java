@@ -48,7 +48,6 @@ public class User {
     private LocalDateTime sessionStartTime;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @Column(name = "ID_Cart")
     private Cart activeCart;
 
     @OneToMany(

@@ -19,7 +19,7 @@ public class ProductGroup {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @NotNull
-    @Column(name = "Product_Group_Id")
+    @Column(name = "Product_Group_ID")
     private Long id;
 
     @Column(name = "Name")
@@ -28,7 +28,7 @@ public class ProductGroup {
 
     @OneToMany(
             targetEntity = Product.class,
-            mappedBy = "group",
+            mappedBy = "productGroup",
             cascade = {CascadeType.ALL},
             fetch = FetchType.LAZY
     )
