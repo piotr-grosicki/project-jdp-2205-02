@@ -14,7 +14,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@Table(name = "Product")
+@Table(name = "PRODUCTS")
 
 public class Product {
 
