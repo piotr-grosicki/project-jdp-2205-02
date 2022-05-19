@@ -1,38 +1,59 @@
 package com.kodilla.ecommercee.controller;
 
+import com.kodilla.ecommercee.domain.Product;
 import com.kodilla.ecommercee.domain.ProductDto;
+import com.kodilla.ecommercee.mapper.ProductMapper;
+import com.kodilla.ecommercee.service.ProductDbService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping("/v1/products")
 public class ProductController {
 
+private final ProductMapper productMapper;
+private final ProductDbService productDbService;
+
+    @Autowired
+
+    public ProductController(ProductMapper productMapper, ProductDbService productDbService) {
+        this.productMapper = productMapper;
+        this.productDbService = productDbService;
+    }
+
     @GetMapping
-    public List<ProductDto> getProducts() {
-        return new ArrayList<>();
+    public ResponseEntity<List<ProductDto>> getProducts() {
+        List<Product>products = productDbService.getProducts();
+        return ResponseEntity.ok(productMapper.mapToProductDtoList(products));
     }
 
     @GetMapping(value = "{productId}")
-    public ProductDto getProduct(@PathVariable Long productId) {
-        return new ProductDto(1L,"Produkt1",new BigDecimal(12),4);
+    public ResponseEntity<ProductDto> getProduct(@PathVariable Long productId) throws ProductNotFoundException{
+        return ResponseEntity.ok(productMapper.mapToProductDto(productDbService.getProduct(productId)));
     }
 
     @DeleteMapping(value = "{productId}")
-    public void deleteProduct(@PathVariable Long productId) {
+    public ResponseEntity<Void>deleteProduct(@PathVariable Long productId) {
+        productDbService.deleteProduct(productId);
+        return ResponseEntity.ok().build();
+
     }
 
     @PutMapping
-    public ProductDto updateProduct(@RequestBody ProductDto productDto){
-        return new ProductDto(1L,"Produkt1.1",new BigDecimal(14),2);
+    public ResponseEntity<ProductDto>updateProduct(@RequestBody ProductDto productDto) throws ProductGroupNotFoundException {
+        Product product = productMapper.mapToProduct(productDto);
+        Product saveProduct = productDbService.saveProduct(product);
+        return ResponseEntity.ok(productMapper.mapToProductDto(saveProduct)) ;
     }
 
     @PostMapping
-    public void createProduct(@RequestBody ProductDto productDto){
-
+    public ResponseEntity<Void>createProduct(@RequestBody ProductDto productDto) throws ProductGroupNotFoundException{
+        Product product = productMapper.mapToProduct(productDto);
+        productDbService.saveProduct(product);
+        return ResponseEntity.ok().build();
     }
 
 }
