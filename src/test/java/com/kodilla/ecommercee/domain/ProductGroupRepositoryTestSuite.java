@@ -108,7 +108,11 @@ public class ProductGroupRepositoryTestSuite {
 
         //CleanUp
         productGroupRepository.deleteById(id);
-
+        productRepository.deleteById(product1.getProductId());
+        productRepository.deleteById(product2.getProductId());
+        productRepository.deleteById(product3.getProductId());
+        list = productRepository.findAll();
+        assertEquals(0,list.size());
     }
 
     @Test
