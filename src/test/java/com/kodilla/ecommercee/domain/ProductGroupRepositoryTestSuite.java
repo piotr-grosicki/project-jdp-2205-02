@@ -89,45 +89,35 @@ public class ProductGroupRepositoryTestSuite {
     @Test
     void saveWithProductsTest() {
         //Given
-        Product product1 = new Product();
-        Product product2 = new Product();
-        Product product3 = new Product();
         ProductGroup productGroup = new ProductGroup("Test Group");
+        Product product1 = new Product(null, "product1", new BigDecimal(10), 3, new ArrayList<>(), productGroup);
+        Product product2 = new Product(null, "product2", new BigDecimal(10), 3, new ArrayList<>(), productGroup);
+        Product product3 = new Product(null, "product3", new BigDecimal(10), 3, new ArrayList<>(), productGroup);
         productGroup.getProducts().add(product1);
         productGroup.getProducts().add(product2);
         productGroup.getProducts().add(product3);
-
         productGroupRepository.save(productGroup);
         Long id = productGroup.getId();
-
         //When
         List<Product> list = productRepository.findAll();
-
         //Then
         assertEquals(3, list.size());
-
         //CleanUp
         productGroupRepository.deleteById(id);
-
     }
 
     @Test
     void deleteGroupWithProductsTest() {
         //Given
         ProductGroup productGroup = new ProductGroup("Test Group");
-
         Product product1 = new Product(null, "product1", new BigDecimal(10), 3, new ArrayList<>(), productGroup);
         Product product2 = new Product(null, "product2", new BigDecimal(10), 3, new ArrayList<>(), productGroup);
         Product product3 = new Product(null, "product3", new BigDecimal(10), 3, new ArrayList<>(), productGroup);
-
         productGroup.getProducts().add(product1);
         productGroup.getProducts().add(product2);
         productGroup.getProducts().add(product3);
-
         productGroupRepository.save(productGroup);
-
         Long id = productGroup.getId();
-
         //When
         productGroupRepository.deleteById(id);
         List<Product> list = productRepository.findAll();
@@ -141,12 +131,9 @@ public class ProductGroupRepositoryTestSuite {
         ProductGroup productGroup = new ProductGroup("Test Group");
         Product product1 = new Product(null, "product1", new BigDecimal(10), 3, new ArrayList<>(), productGroup);
         Product product2 = new Product(null, "product2", new BigDecimal(10), 3, new ArrayList<>(), productGroup);
-
         productGroup.getProducts().add(product1);
         productGroup.getProducts().add(product2);
-
         productGroupRepository.save(productGroup);
-
         Long id = productGroup.getId();
         List<Product> firstList = productRepository.findAll();
         //When
@@ -155,7 +142,6 @@ public class ProductGroupRepositoryTestSuite {
         productGroup.getProducts().add(product3);
         productGroupRepository.save(productGroup);
         List<Product> secondList = productRepository.findAll();
-//        String newGroupName =
         //Then
         assertEquals(2, firstList.size());
         assertEquals(3, secondList.size());
