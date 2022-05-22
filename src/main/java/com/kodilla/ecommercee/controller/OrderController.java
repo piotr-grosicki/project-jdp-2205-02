@@ -1,45 +1,78 @@
 package com.kodilla.ecommercee.controller;
 
 
+import com.kodilla.ecommercee.domain.Cart;
+import com.kodilla.ecommercee.domain.Order;
 import com.kodilla.ecommercee.domain.OrderDto;
+import com.kodilla.ecommercee.domain.OrderStatus;
+import com.kodilla.ecommercee.exception.OrderNotFoundException;
+import com.kodilla.ecommercee.mapper.OrderMapper;
+import com.kodilla.ecommercee.service.OrderDbService;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
 @AllArgsConstructor
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/v1/orders")
 public class OrderController {
+    private OrderDbService orderDbService;
+    private OrderMapper orderMapper;
 
     @GetMapping
     public List<OrderDto> getOrders() {
-        return new ArrayList<>();
+        List<Order> orderlist = orderDbService.getAllOrders();
+        return orderMapper.mapToOrderDtoList(orderlist);
     }
 
     @GetMapping(value = "{orderId}")
-    public OrderDto getOrder(@PathVariable long orderId) {
-        return new OrderDto(1,1,"order status", LocalDate.of(2000, 11, 11));
+    public ResponseEntity<OrderDto> getOrder(@PathVariable Long orderId) {
+        try{
+            return ResponseEntity.ok(orderMapper.mapToOrderDto(orderDbService.getOrder(orderId)));
+        }catch (OrderNotFoundException e){
+            Order order = new Order();
+            return ResponseEntity.badRequest().body(new OrderDto(0L, new Cart(), OrderStatus.ANULOWANY, LocalDateTime.of(0,0,0,0,0,0)));
+        }
+
+
     }
     @DeleteMapping(value = "{orderId}")
-    public String deleteOrder(@PathVariable long orderId) {
-        return "order xyz was deleted";
+    public ResponseEntity<String> deleteOrder(@PathVariable Long orderId) {
+        try{
+             orderDbService.deleteOrder(orderId);
+             return ResponseEntity.ok().body("Order has been deleted");
+        }catch (OrderNotFoundException e){
+             return ResponseEntity.badRequest().body("There is no Order with such ID");
+        }
+
     }
 
     @PutMapping
-    public OrderDto updateOrder(@RequestBody OrderDto orderDto){
-        return new OrderDto(1,1,"order status ", LocalDate.of(2010, 10, 20));
+    public ResponseEntity<String> updateOrder(@RequestBody OrderDto orderDto){
+        try{
+            Order order = orderMapper.mapToOrder(orderDto);
+            orderDbService.updateOrder(order);
+            return ResponseEntity.ok().body( "Order has been updated");
+        }catch (OrderNotFoundException e){
+
+            return ResponseEntity.badRequest().body("There is no order with such ID");
+        }
+
     }
 
     @PostMapping
-    public OrderDto createOrder(@RequestBody OrderDto orderDto){
-
-        return new OrderDto(2, 2,"create order" , LocalDate.of(2111, 9, 11));
+    public ResponseEntity<Void> createOrder(@RequestBody OrderDto orderDto){
+        Order order = orderMapper.mapToOrder(orderDto);
+        orderDbService.createOrder(order);
+        return ResponseEntity.ok().build();
     }
 
 }

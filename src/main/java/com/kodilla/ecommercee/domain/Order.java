@@ -39,9 +39,5 @@ public class Order {
     @Column(name = "Date")
     private LocalDateTime date = LocalDateTime.now();
 
-//    @PreRemove
-//    void clear(){
-//        this.cart  = null;
-//    }
 
 }
