@@ -38,7 +38,8 @@ public class Cart {
     )
     private List<Product> items;
 
-    @OneToOne(mappedBy = "cart", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "cart", cascade = CascadeType.REMOVE,orphanRemoval = true)
     private Order order;
+
 
 }
