@@ -24,7 +24,7 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping(value = "{userId}/block")
+    @PutMapping(value = "block/{userId}")
     public ResponseEntity<String> blockUser(@PathVariable Long userId) {
         try{
             return ResponseEntity.ok(userDbService.blockUser(userId));
@@ -33,7 +33,7 @@ public class UserController {
         }
     }
 
-    @PutMapping(value = "{userId}/{userEmail}/generateToken")
+    @PutMapping(value = "generateToken/{userId}/{userEmail}")
     public ResponseEntity<String> generateToken(@PathVariable Long userId, @PathVariable String userEmail) {
         try {
             return ResponseEntity.ok(userDbService.generateToken(userId, userEmail));
@@ -42,7 +42,7 @@ public class UserController {
         }
     }
 
-    @PutMapping(value = "{userId}/unblock")
+    @PutMapping(value = "unblock/{userId}")
     public ResponseEntity<String> unblockUser(@PathVariable Long userId) {
         try {
             return ResponseEntity.ok(userDbService.unblockUser(userId));
