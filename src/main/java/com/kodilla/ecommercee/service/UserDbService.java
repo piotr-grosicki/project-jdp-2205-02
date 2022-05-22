@@ -16,14 +16,6 @@ public class UserDbService {
 
     private final UserRepository userRepository;
 
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
-    }
-
-    public User getUser(final Long userId) throws UserNotFoundException {
-        return userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
-    }
-
     public void createUser(final User user) {
         userRepository.save(user);
     }
@@ -76,24 +68,6 @@ public class UserDbService {
             }
         } else {
             return false;
-        }
-    }
-
-    public String getToken(final Long userId, final String userEmail) throws UserNotFoundException {
-        User currentUser = userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
-        if (currentUser.getEmail().equals(userEmail)) {
-            if (currentUser.isActive()) {
-                if (checkTokenValidity(userId)) {
-                    String token = currentUser.getSessionToken();
-                    return token;
-                } else {
-                    return "Token has expired. Generate a new one.";
-                }
-            } else {
-                return "The user is blocked";
-            }
-        } else {
-            return "The user data provided is incorrect";
         }
     }
 }
