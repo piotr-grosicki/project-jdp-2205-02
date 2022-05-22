@@ -14,7 +14,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -28,9 +27,9 @@ public class OrderController {
     private OrderMapper orderMapper;
 
     @GetMapping
-    public List<OrderDto> getOrders() {
+    public ResponseEntity<List<OrderDto>> getOrders() {
         List<Order> orderlist = orderDbService.getAllOrders();
-        return orderMapper.mapToOrderDtoList(orderlist);
+        return ResponseEntity.ok().body(orderMapper.mapToOrderDtoList(orderlist));
     }
 
     @GetMapping(value = "{orderId}")
