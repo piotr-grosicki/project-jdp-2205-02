@@ -39,7 +39,7 @@ public class User {
 
     @NotNull
     @Column(name = "Active")
-    private boolean isActive;
+    private boolean active;
 
     @Column(name = "Session_Token")
     private String sessionToken;
@@ -47,8 +47,8 @@ public class User {
     @Column(name = "Session_Started")
     private LocalDateTime sessionStartTime;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Cart activeCart;
+    @Column(name = "activeCart_ID")
+    private Long activeCartId;
 
     @OneToMany(
             targetEntity = Cart.class,
@@ -58,17 +58,16 @@ public class User {
     )
     private List<Cart> carts;
 
-    public User(String userName, String phoneNumber, String email, String shippingAddress, boolean isActive,
-                String sessionToken, LocalDateTime sessionStartTime, Cart activeCart, List<Cart> carts) {
+    public User(String userName, String phoneNumber, String email, String shippingAddress, boolean active,
+                String sessionToken, LocalDateTime sessionStartTime, Long activeCartId) {
         this.userName = userName;
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.shippingAddress = shippingAddress;
-        this.isActive = isActive;
+        this.active = active;
         this.sessionToken = sessionToken;
         this.sessionStartTime = sessionStartTime;
-        this.activeCart = activeCart;
-        this.carts = carts;
+        this.activeCartId = activeCartId;
+        this.carts = new ArrayList<>();
     }
-
 }
