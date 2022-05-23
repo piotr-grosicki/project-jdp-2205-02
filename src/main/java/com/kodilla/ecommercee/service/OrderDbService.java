@@ -21,21 +21,20 @@ public class OrderDbService {
     }
 
     public Order getOrder(long id) throws OrderNotFoundException{
-    return orderRepository.findById(id).orElseThrow(OrderNotFoundException::new);
+        return orderRepository.findById(id).orElseThrow(OrderNotFoundException::new);
     }
 
-    public void createOrder(final Order order){
+    public String createOrder(final Order order){
         orderRepository.save(order);
+        return "The order has been created";
     }
 
     public void updateOrder(final Order order) throws OrderNotFoundException{
         orderRepository.save(order);
-
     }
 
     public void deleteOrder(long id) throws OrderNotFoundException{
         orderRepository.deleteById(id);
     }
-
 
 }

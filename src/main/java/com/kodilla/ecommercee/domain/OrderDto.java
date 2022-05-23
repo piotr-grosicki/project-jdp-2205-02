@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 public class OrderDto {
 
     private long order_id;
-    private Cart cart;
+    private Long cartId;
     private OrderStatus status;
     private LocalDateTime order_date;
 
