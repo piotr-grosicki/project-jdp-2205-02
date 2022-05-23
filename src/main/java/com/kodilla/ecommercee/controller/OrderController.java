@@ -35,7 +35,6 @@ public class OrderController {
         try{
             return ResponseEntity.ok(orderMapper.mapToOrderDto(orderDbService.getOrder(orderId)));
         }catch (OrderNotFoundException e){
-            Order order = new Order();
             return ResponseEntity.badRequest().body(new OrderDto(0L, 0L, OrderStatus.ANULOWANY, LocalDateTime.of(0,0,0,0,0,0)));
         }
     }
@@ -65,8 +64,8 @@ public class OrderController {
         try {
             Order order = orderMapper.mapToOrder(orderDto);
             orderDbService.createOrder(order);
-            return ResponseEntity.ok().build();}
-        catch (CartNotFoundException e) {
+            return ResponseEntity.ok().body("Order has been created");
+        }catch (CartNotFoundException e) {
             return ResponseEntity.badRequest().body("There is no order or cart with such ID");
         }
     }

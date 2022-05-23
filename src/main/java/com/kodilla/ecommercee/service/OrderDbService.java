@@ -24,9 +24,8 @@ public class OrderDbService {
         return orderRepository.findById(id).orElseThrow(OrderNotFoundException::new);
     }
 
-    public String createOrder(final Order order){
+    public void createOrder(final Order order){
         orderRepository.save(order);
-        return "The order has been created";
     }
 
     public void updateOrder(final Order order) throws OrderNotFoundException{
