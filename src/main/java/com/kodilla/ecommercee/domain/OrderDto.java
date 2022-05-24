@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class OrderDto {
 
-    private long order_id;
+    private Long order_id;
     private Long cartId;
     private OrderStatus status;
     private LocalDateTime order_date;
