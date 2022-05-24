@@ -38,7 +38,7 @@ public class OrderController {
             return ResponseEntity.ok(orderMapper.mapToOrderDto(orderDbService.getOrder(orderId)));
         }catch (OrderNotFoundException e){
             Order order = new Order();
-            return ResponseEntity.badRequest().body(new OrderDto(0L, new Cart(), OrderStatus.ANULOWANY, LocalDateTime.of(0,0,0,0,0,0)));
+            return ResponseEntity.badRequest().body(new OrderDto(0L, 0L, OrderStatus.ANULOWANY, LocalDateTime.of(0,0,0,0,0,0)));
         }
     }
     @DeleteMapping(value = "{orderId}")
@@ -57,14 +57,14 @@ public class OrderController {
             Order order = orderMapper.mapToOrder(orderDto);
             orderDbService.updateOrder(order);
             return ResponseEntity.ok().body( "Order has been updated");
-        }catch (OrderNotFoundException e){
+        }catch (OrderNotFoundException | CartNotFoundException e){
 
             return ResponseEntity.badRequest().body("There is no order with such ID");
         }
     }
 
     @PostMapping
-    public ResponseEntity<Void> createOrder(@RequestBody OrderDto orderDto){
+    public ResponseEntity<Void> createOrder(@RequestBody OrderDto orderDto) throws CartNotFoundException {
         Order order = orderMapper.mapToOrder(orderDto);
         orderDbService.createOrder(order);
         return ResponseEntity.ok().build();
