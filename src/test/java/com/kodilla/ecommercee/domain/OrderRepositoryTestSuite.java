@@ -179,5 +179,40 @@ public class OrderRepositoryTestSuite {
         userRepository.deleteById(user1.getUserId());
         userRepository.deleteById(user2.getUserId());
     }
+    @Test
+    void deleteWithCartTest() {
+
+
+        //Given
+        Cart cart = new Cart();
+        Order order = new Order();
+        User user = new User();
+
+        user.setEmail("email@email.com");
+        user.setUserName("user");
+        user.setActive(true);
+        userRepository.save(user);
+        cart.setUser(user);
+        cart.setTotalValue(new BigDecimal(100));
+        cartRepository.save(cart);
+        order.setCart(cart);
+        order.setOrderStatus(OrderStatus.WYSLANY);
+
+        orderRepository.save(order);
+
+        List<Cart> beforeDel = cartRepository.findAll();
+
+        orderRepository.deleteById(order.getOrderId());
+        //When
+
+        List<Cart> afterDel = cartRepository.findAll();
+        Optional<Order> order1 = orderRepository.findById(order.getOrderId());
+        //Then
+        assertEquals(1, beforeDel.size());
+        assertEquals(1, afterDel.size());
+        //CleanUp
+        cartRepository.deleteById(cart.getCartId());
+        userRepository.deleteById(user.getUserId());
+    }
 
 }

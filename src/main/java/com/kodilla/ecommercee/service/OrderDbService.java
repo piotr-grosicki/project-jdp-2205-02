@@ -28,12 +28,23 @@ public class OrderDbService {
         orderRepository.save(order);
     }
 
-    public void updateOrder(final Order order) throws OrderNotFoundException{
-        orderRepository.save(order);
+    public String updateOrder(final Order order) throws OrderNotFoundException {
+
+        if (orderRepository.existsById(order.getOrderId())) {
+            orderRepository.save(order);
+            return "Order has been updated";
+        } else {
+            throw new OrderNotFoundException();
+        }
     }
 
-    public void deleteOrder(long id) throws OrderNotFoundException{
-        orderRepository.deleteById(id);
-    }
+    public String deleteOrder(long id) throws OrderNotFoundException {
 
+            if (orderRepository.existsById(id)) {
+                orderRepository.deleteById(id);
+                return "Order has been deleted";
+            } else {
+                throw new OrderNotFoundException();
+            }
+        }
 }

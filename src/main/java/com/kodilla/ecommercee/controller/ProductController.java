@@ -2,6 +2,8 @@ package com.kodilla.ecommercee.controller;
 
 import com.kodilla.ecommercee.domain.Product;
 import com.kodilla.ecommercee.domain.ProductDto;
+import com.kodilla.ecommercee.exception.ProductGroupNotFoundException;
+import com.kodilla.ecommercee.exception.ProductNotFoundException;
 import com.kodilla.ecommercee.mapper.ProductMapper;
 import com.kodilla.ecommercee.service.ProductDbService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +33,7 @@ private final ProductDbService productDbService;
     }
 
     @GetMapping(value = "{productId}")
-    public ResponseEntity<ProductDto> getProduct(@PathVariable Long productId) throws ProductNotFoundException{
+    public ResponseEntity<ProductDto> getProduct(@PathVariable Long productId) throws ProductNotFoundException {
         return ResponseEntity.ok(productMapper.mapToProductDto(productDbService.getProduct(productId)));
     }
 
