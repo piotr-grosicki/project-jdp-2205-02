@@ -191,7 +191,7 @@ public class OrderRepositoryTestSuite {
         user.setActive(true);
         userRepository.save(user);
         cart.setUser(user);
-        cart.setTotalValue(100L);
+        cart.setTotalValue(10L);
         cartRepository.save(cart);
         order.setCart(cart);
         order.setOrderStatus(OrderStatus.WYSLANY);

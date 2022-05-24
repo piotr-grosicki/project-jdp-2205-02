@@ -3,6 +3,7 @@ package com.kodilla.ecommercee.service;
 
 import com.kodilla.ecommercee.domain.Order;
 import com.kodilla.ecommercee.domain.OrderStatus;
+import com.kodilla.ecommercee.exception.CartNotFoundException;
 import com.kodilla.ecommercee.exception.OrderNotFoundException;
 import com.kodilla.ecommercee.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +25,7 @@ public class OrderDbService {
         return orderRepository.findById(id).orElseThrow(OrderNotFoundException::new);
     }
 
-    public void createOrder(final Order order){
+    public void createOrder(final Order order) throws CartNotFoundException {
         orderRepository.save(order);
     }
 
