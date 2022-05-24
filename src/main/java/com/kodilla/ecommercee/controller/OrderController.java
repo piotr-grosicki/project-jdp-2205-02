@@ -40,8 +40,6 @@ public class OrderController {
             Order order = new Order();
             return ResponseEntity.badRequest().body(new OrderDto(0L, new Cart(), OrderStatus.ANULOWANY, LocalDateTime.of(0,0,0,0,0,0)));
         }
-
-
     }
     @DeleteMapping(value = "{orderId}")
     public ResponseEntity<String> deleteOrder(@PathVariable Long orderId) {
@@ -51,7 +49,6 @@ public class OrderController {
         }catch (OrderNotFoundException e){
              return ResponseEntity.badRequest().body("There is no Order with such ID");
         }
-
     }
 
     @PutMapping
@@ -64,7 +61,6 @@ public class OrderController {
 
             return ResponseEntity.badRequest().body("There is no order with such ID");
         }
-
     }
 
     @PostMapping

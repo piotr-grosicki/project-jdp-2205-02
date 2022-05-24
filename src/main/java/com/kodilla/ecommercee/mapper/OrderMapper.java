@@ -13,10 +13,10 @@ public class OrderMapper {
 
     public Order mapToOrder(final OrderDto orderDto){
         Order order = new Order();
-        order.setOrderId(orderDto.getOrder_id());
+        order.setOrderId(orderDto.getOrderId());
         order.setCart(orderDto.getCart());
         order.setOrderStatus(orderDto.getStatus());
-        order.setDate(orderDto.getOrder_date());
+        order.setDate(orderDto.getOrderDate());
         return order;
     }
 

@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 import java.util.List;
 
 @Getter
@@ -23,7 +24,7 @@ public class Cart {
 
     @Column(name = "Total_Value")
     @NotNull
-    private long totalValue;
+    private BigDecimal totalValue;
 
     @ManyToOne
     @JoinColumn(name = "ID_User")
@@ -38,7 +39,7 @@ public class Cart {
     )
     private List<Product> items;
 
-    @OneToOne(mappedBy = "cart", cascade = CascadeType.REMOVE,orphanRemoval = true)
+    @OneToOne(mappedBy = "cart", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private Order order;
 
 
