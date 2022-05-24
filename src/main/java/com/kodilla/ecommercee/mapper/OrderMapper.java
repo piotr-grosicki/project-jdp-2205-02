@@ -20,10 +20,10 @@ public class OrderMapper {
     public Order mapToOrder(final OrderDto orderDto) throws CartNotFoundException{
         Cart cart = cartRepository.findById(orderDto.getCartId()).orElseThrow(CartNotFoundException::new);
         Order order = new Order();
-        order.setOrderId(orderDto.getOrder_id());
+        order.setOrderId(orderDto.getOrderId());
         order.setCart(cart);
         order.setOrderStatus(orderDto.getStatus());
-        order.setDate(orderDto.getOrder_date());
+        order.setDate(orderDto.getOrderDate());
         return order;
     }
 
