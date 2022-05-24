@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.math.BigDecimal;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -28,7 +30,7 @@ public class CartRepositoryTestSuite {
         user.setActive(true);
         userRepository.save(user);
         cart.setUser(user);
-        cart.setTotalValue(100L);
+        cart.setTotalValue(new BigDecimal(100));
 
         //When
         cartRepository.save(cart);
@@ -51,14 +53,15 @@ public class CartRepositoryTestSuite {
         user.setActive(true);
         userRepository.save(user);
         cart.setUser(user);
-        cart.setTotalValue(100L);
+        cart.setTotalValue(new BigDecimal(100));
 
         //When
-        cart.setTotalValue(150L);
+        cart.setTotalValue(new BigDecimal(150));
         cartRepository.save(cart);
 
         //Then
-        assertEquals(150L, cartRepository.findById(cart.getCartId()).get().getTotalValue());
+        Cart retrievedCart = cartRepository.findById(cart.getCartId()).get();
+        assertEquals(new BigDecimal("150.00"), retrievedCart.getTotalValue());
 
         //Clean Up
         cartRepository.deleteById(cart.getCartId());
@@ -75,7 +78,7 @@ public class CartRepositoryTestSuite {
         user.setActive(true);
         userRepository.save(user);
         cart.setUser(user);
-        cart.setTotalValue(100L);
+        cart.setTotalValue(new BigDecimal(100));
 
         //When
         cartRepository.save(cart);

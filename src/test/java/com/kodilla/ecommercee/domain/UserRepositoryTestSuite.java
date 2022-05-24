@@ -8,8 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import javax.transaction.Transactional;
+
 import static org.junit.Assert.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -141,18 +144,18 @@ public class UserRepositoryTestSuite {
         User user = createUser();
         Cart cart2 = new Cart();
         Cart cart3 = new Cart();
-        user.getCarts().add(cart1);
         user.getCarts().add(cart2);
         user.getCarts().add(cart3);
-        cart1.setUser(user);
         cart2.setUser(user);
+        cart2.setTotalValue(BigDecimal.ONE);
         cart3.setUser(user);
+        cart3.setTotalValue(BigDecimal.ONE);
         //When
         userRepository.save(user);
         List<Cart> cartsList = cartRepository.findAll();
         //Then
         assertNotEquals(Optional.empty(), Optional.ofNullable(user.getUserId()));
-        assertEquals(3, cartsList.size());
+        assertEquals(2, cartsList.size());
         //CleanUp
         userRepository.deleteById(user.getUserId());
     }
@@ -163,6 +166,7 @@ public class UserRepositoryTestSuite {
         User user = createUser();
         user.getCarts().add(cart1);
         cart1.setUser(user);
+        cart1.setTotalValue(BigDecimal.ONE);
         userRepository.save(user);
         Long cartId = cart1.getCartId();
         //When

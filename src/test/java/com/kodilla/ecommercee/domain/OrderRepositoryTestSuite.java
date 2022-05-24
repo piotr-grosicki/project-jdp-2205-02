@@ -12,7 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import static org.junit.Assert.*;
 
 
-
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,7 +44,7 @@ public class OrderRepositoryTestSuite {
         user.setActive(true);
         userRepository.save(user);
         cart.setUser(user);
-        cart.setTotalValue(100L);
+        cart.setTotalValue(new BigDecimal(100));
         cartRepository.save(cart);
         order.setCart(cart);
         order.setOrderStatus(OrderStatus.WYSLANY);
@@ -77,7 +77,7 @@ public class OrderRepositoryTestSuite {
         user.setActive(true);
         userRepository.save(user);
         cart.setUser(user);
-        cart.setTotalValue(100L);
+        cart.setTotalValue(new BigDecimal(100));
         cartRepository.save(cart);
         order.setCart(cart);
         order.setOrderStatus(OrderStatus.WYSLANY);
@@ -105,7 +105,7 @@ public class OrderRepositoryTestSuite {
         user.setActive(true);
         userRepository.save(user);
         cart.setUser(user);
-        cart.setTotalValue(100L);
+        cart.setTotalValue(new BigDecimal(100));
         cartRepository.save(cart);
         order.setCart(cart);
         order.setOrderStatus(OrderStatus.WYSLANY);
@@ -135,7 +135,7 @@ public class OrderRepositoryTestSuite {
         user1.setActive(true);
         userRepository.save(user1);
         cart1.setUser(user1);
-        cart1.setTotalValue(100L);
+        cart1.setTotalValue(new BigDecimal(100));
         cartRepository.save(cart1);
         order1.setCart(cart1);
         order1.setOrderStatus(OrderStatus.WYSLANY);
@@ -149,7 +149,7 @@ public class OrderRepositoryTestSuite {
         user2.setActive(true);
         userRepository.save(user2);
         cart2.setUser(user2);
-        cart2.setTotalValue(100L);
+        cart2.setTotalValue(new BigDecimal(100));
         cartRepository.save(cart2);
         order2.setCart(cart2);
         order2.setOrderStatus(OrderStatus.WYSLANY);

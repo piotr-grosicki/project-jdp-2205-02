@@ -9,8 +9,10 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class OrderDto {
 
+
     private Long orderId;
     private Long cartId;
+
     private OrderStatus status;
     private LocalDateTime orderDate;
 
